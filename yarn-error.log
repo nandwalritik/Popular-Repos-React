@@ -1,0 +1,76 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn add @material-ui/lab/Skeleton
+
+PATH: 
+  /home/nandwal/.local/bin:/home/nandwal/anaconda3/condabin:/home/nandwal/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:[PATH_TO_FLUTTER_GIT_DIRECTORY]/flutter/bin:/home/nandwal/Android/Sdk/emulator:/home/nandwal/Android/Sdk/tools:/home/nandwal/Android/Sdk/tools/bin:/home/nandwal/Android/Sdk/platform-tools:[PATH_TO_FLUTTER_GIT_DIRECTORY]/flutter/bin:/home/nandwal/Android/Sdk/emulator:/home/nandwal/Android/Sdk/tools:/home/nandwal/Android/Sdk/tools/bin:/home/nandwal/Android/Sdk/platform-tools
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  12.16.2
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@material-ui%2flab/Skeleton: Request "https://registry.yarnpkg.com/@material-ui%2flab/Skeleton" returned a 405
+      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66996:18)
+      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140748:22)
+      at Request.emit (events.js:310:20)
+      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141720:10)
+      at Request.emit (events.js:310:20)
+      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141642:12)
+      at Object.onceWrapper (events.js:416:28)
+      at IncomingMessage.emit (events.js:322:22)
+      at endReadableNT (_stream_readable.js:1187:12)
+      at processTicksAndRejections (internal/process/task_queues.js:84:21)
+
+npm manifest: 
+  {
+    "name": "serversiderenderingfinaltry",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "start": "webpack -w & nodemon server.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "babel": {
+      "presets": [
+        "env",
+        "react"
+      ],
+      "plugins": [
+        "transform-object-rest-spread"
+      ]
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "babel-core": "^6.26.3",
+      "babel-loader": "^7.1.2",
+      "babel-plugin-transform-object-rest-spread": "^6.26.0",
+      "babel-preset-env": "^1.6.1",
+      "babel-preset-react": "^6.24.1",
+      "nodemon": "^1.12.5",
+      "webpack": "^3.10.0",
+      "webpack-node-externals": "^1.6.0"
+    },
+    "dependencies": {
+      "@material-ui/core": "^4.10.0",
+      "cors": "^2.8.4",
+      "express": "^4.16.2",
+      "isomorphic-fetch": "^2.2.1",
+      "react": "^16.13.1",
+      "react-dom": "^16.13.1",
+      "react-router-dom": "^4.2.2",
+      "serialize-javascript": "^1.4.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
