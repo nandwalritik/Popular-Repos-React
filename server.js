@@ -90,11 +90,11 @@ var _Home = __webpack_require__(9);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _GridComp = __webpack_require__(15);
+var _GridComp = __webpack_require__(10);
 
 var _GridComp2 = _interopRequireDefault(_GridComp);
 
-var _api = __webpack_require__(3);
+var _api = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -115,36 +115,9 @@ exports.default = routes;
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.fetchPopularRepos = fetchPopularRepos;
-
-var _isomorphicFetch = __webpack_require__(10);
-
-var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function fetchPopularRepos() {
-    var language = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'all';
-
-    var encodedURI = encodeURI('https://api.github.com/search/repositories?q=stars:>1+language:' + language + '&sort=stars&order=desc&type=Repositories');
-
-    return (0, _isomorphicFetch2.default)(encodedURI).then(function (data) {
-        return data.json();
-    }).then(function (repos) {
-        return repos.items;
-    }).catch(function (error) {
-        console.warn(error);
-        return null;
-    });
-}
+module.exports = require("@material-ui/core");
 
 /***/ }),
 /* 4 */
@@ -171,11 +144,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _serializeJavascript = __webpack_require__(14);
+var _serializeJavascript = __webpack_require__(25);
 
 var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
 
-var _api = __webpack_require__(3);
+var _styles = __webpack_require__(26);
 
 var _reactRouterDom = __webpack_require__(1);
 
@@ -186,7 +159,7 @@ var _routes2 = _interopRequireDefault(_routes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express2.default)();
-
+var sheets = new _styles.ServerStyleSheets();
 app.use((0, _cors2.default)());
 
 // We're going to serve up the public
@@ -201,13 +174,17 @@ app.get("*", function (req, res, next) {
 
   promise.then(function (data) {
     var context = { data: data };
-    var markup = (0, _server.renderToString)(_react2.default.createElement(
-      _reactRouterDom.StaticRouter,
-      { location: req.url, context: context },
-      _react2.default.createElement(_App2.default, null)
-    ));
-
-    res.send("\n      <!DOCTYPE html>\n      <html>\n        <head>\n          <title>SSR with RR</title>\n          <script src=\"/bundle.js\" defer></script>\n          <script>window.__INITIAL_DATA__=" + (0, _serializeJavascript2.default)(data) + "</script>\n        </head>\n  \n        <body>\n          <div id=\"app\"> " + markup + "</div>\n        </body>\n      </html>\n    ");
+    var markup = (0, _server.renderToString)(sheets.collect(_react2.default.createElement(
+      _styles.ThemeProvider,
+      null,
+      _react2.default.createElement(
+        _reactRouterDom.StaticRouter,
+        { location: req.url, context: context },
+        _react2.default.createElement(_App2.default, null)
+      )
+    )));
+    var css = sheets.toString();
+    res.send("\n      <!DOCTYPE html>\n      <html>\n        <head>\n          <title>SSR with RR</title>\n          <style id=\"jss-server-side\">" + css + "</style>\n          <script src=\"/bundle.js\" defer></script>\n          <script>window.__INITIAL_DATA__=" + (0, _serializeJavascript2.default)(data) + "</script>\n        </head>\n  \n        <body>\n          <div id=\"app\"> " + markup + "</div>\n        </body>\n      </html>\n    ");
   }).catch(next);
 });
 app.listen(3001, function () {
@@ -257,11 +234,11 @@ var _routes2 = _interopRequireDefault(_routes);
 
 var _reactRouterDom = __webpack_require__(1);
 
-var _NoMatch = __webpack_require__(11);
+var _NoMatch = __webpack_require__(23);
 
 var _NoMatch2 = _interopRequireDefault(_NoMatch);
 
-var _Navbar = __webpack_require__(12);
+var _Navbar = __webpack_require__(24);
 
 var _Navbar2 = _interopRequireDefault(_Navbar);
 
@@ -350,126 +327,6 @@ function Home() {
 
 /***/ }),
 /* 10 */
-/***/ (function(module, exports) {
-
-module.exports = require("isomorphic-fetch");
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = NoMatch;
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function NoMatch() {
-    return _react2.default.createElement(
-        'div',
-        null,
-        'Four oh Four'
-    );
-}
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-exports.default = Navbar;
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _core = __webpack_require__(13);
-
-var _reactRouterDom = __webpack_require__(1);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function Navbar() {
-    var languages = [{
-        name: 'All',
-        param: 'all'
-    }, {
-        name: 'JavaScript',
-        param: 'javascript'
-    }, {
-        name: 'Ruby',
-        param: 'ruby'
-    }, {
-        name: 'Python',
-        param: 'python'
-    }, {
-        name: 'Java',
-        param: 'java'
-    }];
-
-    var _React$useState = _react2.default.useState(0),
-        _React$useState2 = _slicedToArray(_React$useState, 2),
-        value = _React$useState2[0],
-        setValue = _React$useState2[1];
-
-    var handleChange = function handleChange(event, newValue) {
-        setValue(newValue);
-    };
-
-    return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-            _core.AppBar,
-            { position: 'static' },
-            _react2.default.createElement(
-                _core.Tabs,
-                { value: value, onChange: handleChange, centered: true },
-                languages.map(function (_ref) {
-                    var name = _ref.name,
-                        param = _ref.param;
-                    return _react2.default.createElement(_core.Tab, { key: name,
-                        label: name,
-                        className: true,
-                        component: _reactRouterDom.Link,
-                        to: '/popular/' + param,
-                        selected: true });
-                })
-            )
-        )
-    );
-}
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core");
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-module.exports = require("serialize-javascript");
-
-/***/ }),
-/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -486,49 +343,47 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _core = __webpack_require__(13);
+var _core = __webpack_require__(3);
 
-var _Grid = __webpack_require__(18);
+var _Grid = __webpack_require__(11);
 
 var _Grid2 = _interopRequireDefault(_Grid);
 
-var _Avatar = __webpack_require__(20);
+var _Avatar = __webpack_require__(12);
 
 var _Avatar2 = _interopRequireDefault(_Avatar);
 
-var _Info = __webpack_require__(22);
+var _Info = __webpack_require__(13);
 
 var _Info2 = _interopRequireDefault(_Info);
 
-var _IconButton = __webpack_require__(26);
+var _IconButton = __webpack_require__(14);
 
 var _IconButton2 = _interopRequireDefault(_IconButton);
 
-var _CardContent = __webpack_require__(27);
+var _CardContent = __webpack_require__(15);
 
 var _CardContent2 = _interopRequireDefault(_CardContent);
 
-var _Star = __webpack_require__(28);
+var _Star = __webpack_require__(16);
 
 var _Star2 = _interopRequireDefault(_Star);
 
-var _Typography = __webpack_require__(29);
+var _Typography = __webpack_require__(17);
 
 var _Typography2 = _interopRequireDefault(_Typography);
 
-var _Home = __webpack_require__(30);
+var _Home = __webpack_require__(18);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _CardMedia = __webpack_require__(31);
+var _CardMedia = __webpack_require__(19);
 
 var _CardMedia2 = _interopRequireDefault(_CardMedia);
 
-var _Tooltip = __webpack_require__(32);
+var _Tooltip = __webpack_require__(20);
 
 var _Tooltip2 = _interopRequireDefault(_Tooltip);
-
-var _styles = __webpack_require__(16);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -537,18 +392,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// const useStyles = makeStyles(() => ({
-//   root: {
-//     maxWidth: 345,
-//     maxHeight:400
-//   },
-//   media: {
-//     height: 0,
-//     paddingTop: '56.25%', // 16:9
-//   },
-// }));
-
 
 var GridComp = exports.GridComp = function (_Component) {
     _inherits(GridComp, _Component);
@@ -617,10 +460,9 @@ var GridComp = exports.GridComp = function (_Component) {
             var _state = this.state,
                 repos = _state.repos,
                 loading = _state.loading;
-            // const classes = useStyles();
+
 
             function FormRow(repo) {
-                console.log(repo);
                 return _react2.default.createElement(
                     _react2.default.Fragment,
                     null,
@@ -718,54 +560,103 @@ var GridComp = exports.GridComp = function (_Component) {
 exports.default = GridComp;
 
 /***/ }),
-/* 16 */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/styles");
-
-/***/ }),
-/* 17 */,
-/* 18 */
+/* 11 */
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/Grid");
 
 /***/ }),
-/* 19 */,
-/* 20 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/Avatar");
 
 /***/ }),
-/* 21 */
+/* 13 */
 /***/ (function(module, exports) {
 
-module.exports = require("@babel/runtime/helpers/interopRequireDefault");
+module.exports = require("@material-ui/icons/Info");
 
 /***/ }),
-/* 22 */
+/* 14 */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/IconButton");
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/CardContent");
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/icons/Star");
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Typography");
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/icons/Home");
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/CardMedia");
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Tooltip");
+
+/***/ }),
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(21);
-
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
-exports.default = void 0;
+exports.fetchPopularRepos = fetchPopularRepos;
 
-var _react = _interopRequireDefault(__webpack_require__(0));
+var _isomorphicFetch = __webpack_require__(22);
 
-var _createSvgIcon = _interopRequireDefault(__webpack_require__(23));
+var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
-var _default = (0, _createSvgIcon.default)(_react.default.createElement("path", {
-  d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
-}), 'Info');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = _default;
+function fetchPopularRepos() {
+    var language = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'all';
+
+    var encodedURI = encodeURI('https://api.github.com/search/repositories?q=stars:>1+language:' + language + '&sort=stars&order=desc&type=Repositories');
+
+    return (0, _isomorphicFetch2.default)(encodedURI).then(function (data) {
+        return data.json();
+    }).then(function (repos) {
+        return repos.items;
+    }).catch(function (error) {
+        console.warn(error);
+        return null;
+    });
+}
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports) {
+
+module.exports = require("isomorphic-fetch");
 
 /***/ }),
 /* 23 */
@@ -774,123 +665,112 @@ exports.default = _default;
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(21);
-
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
-exports.default = createSvgIcon;
+exports.default = NoMatch;
 
-var _extends2 = _interopRequireDefault(__webpack_require__(24));
+var _react = __webpack_require__(0);
 
-var _react = _interopRequireDefault(__webpack_require__(0));
+var _react2 = _interopRequireDefault(_react);
 
-var _SvgIcon = _interopRequireDefault(__webpack_require__(25));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function createSvgIcon(path, displayName) {
-  var Component = _react.default.memo(_react.default.forwardRef(function (props, ref) {
-    return _react.default.createElement(_SvgIcon.default, (0, _extends2.default)({
-      ref: ref
-    }, props), path);
-  }));
-
-  if (process.env.NODE_ENV !== 'production') {
-    Component.displayName = "".concat(displayName, "Icon");
-  }
-
-  Component.muiName = _SvgIcon.default.muiName;
-  return Component;
+function NoMatch() {
+    return _react2.default.createElement(
+        'div',
+        null,
+        'Four oh Four'
+    );
 }
 
 /***/ }),
 /* 24 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = require("@babel/runtime/helpers/extends");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+exports.default = Navbar;
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _core = __webpack_require__(3);
+
+var _reactRouterDom = __webpack_require__(1);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Navbar() {
+    var languages = [{
+        name: 'All',
+        param: 'all'
+    }, {
+        name: 'JavaScript',
+        param: 'javascript'
+    }, {
+        name: 'Ruby',
+        param: 'ruby'
+    }, {
+        name: 'Python',
+        param: 'python'
+    }, {
+        name: 'Java',
+        param: 'java'
+    }];
+
+    var _React$useState = _react2.default.useState(0),
+        _React$useState2 = _slicedToArray(_React$useState, 2),
+        value = _React$useState2[0],
+        setValue = _React$useState2[1];
+
+    var handleChange = function handleChange(event, newValue) {
+        setValue(newValue);
+    };
+
+    return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+            _core.AppBar,
+            { position: 'static', style: { marginBottom: 10 } },
+            _react2.default.createElement(
+                _core.Tabs,
+                { value: value, onChange: handleChange, centered: true },
+                languages.map(function (_ref) {
+                    var name = _ref.name,
+                        param = _ref.param;
+                    return _react2.default.createElement(_core.Tab, { key: name,
+                        label: name,
+                        className: true,
+                        component: _reactRouterDom.Link,
+                        to: '/popular/' + param,
+                        selected: true });
+                })
+            )
+        )
+    );
+}
 
 /***/ }),
 /* 25 */
 /***/ (function(module, exports) {
 
-module.exports = require("@material-ui/core/SvgIcon");
+module.exports = require("serialize-javascript");
 
 /***/ }),
 /* 26 */
 /***/ (function(module, exports) {
 
-module.exports = require("@material-ui/core/IconButton");
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/CardContent");
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(21);
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(__webpack_require__(0));
-
-var _createSvgIcon = _interopRequireDefault(__webpack_require__(23));
-
-var _default = (0, _createSvgIcon.default)(_react.default.createElement("path", {
-  d: "M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-}), 'Star');
-
-exports.default = _default;
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/Typography");
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(21);
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(__webpack_require__(0));
-
-var _createSvgIcon = _interopRequireDefault(__webpack_require__(23));
-
-var _default = (0, _createSvgIcon.default)(_react.default.createElement("path", {
-  d: "M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
-}), 'Home');
-
-exports.default = _default;
-
-/***/ }),
-/* 31 */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/CardMedia");
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/Tooltip");
+module.exports = require("@material-ui/core/styles");
 
 /***/ })
 /******/ ]);

@@ -4,12 +4,12 @@ import { renderToString } from "react-dom/server"
 import App from '../shared/App'
 import React from 'react'
 import serialize from 'serialize-javascript'
-import { fetchPopularRepos } from '../shared/api'
+import { ServerStyleSheets, ThemeProvider } from '@material-ui/core/styles';
 import {matchPath} from 'react-router-dom'
 import routes from '../shared/routes'
 import { StaticRouter } from 'react-router-dom'
 const app = express()
-
+const sheets = new ServerStyleSheets();
 app.use(cors())
 
 // We're going to serve up the public
@@ -25,16 +25,21 @@ app.get("*", (req, res, next) => {
   promise.then((data)=>{
     const context = {data}
     const markup = renderToString(
-      <StaticRouter location={req.url} context={context}>
+      sheets.collect(
+        <ThemeProvider>
+            <StaticRouter location={req.url} context={context}>
               <App />
-      </StaticRouter>
+            </StaticRouter>
+        </ThemeProvider>
+      ) 
     )
-  
+    const css = sheets.toString();    
     res.send(`
       <!DOCTYPE html>
       <html>
         <head>
           <title>SSR with RR</title>
+          <style id="jss-server-side">${css}</style>
           <script src="/bundle.js" defer></script>
           <script>window.__INITIAL_DATA__=${serialize(data)}</script>
         </head>

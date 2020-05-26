@@ -31,7 +31,7 @@ export default function Navbar(){
 return(
         
         <div>
-            <AppBar position='static'>
+            <AppBar position='static' style={{marginBottom:10}}>
                 <Tabs  value={value} onChange={handleChange} centered>
                 {languages.map(({name,param})=>(
                         <Tab key={name} 

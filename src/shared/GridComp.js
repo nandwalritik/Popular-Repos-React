@@ -10,20 +10,6 @@ import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
 import CardMedia from '@material-ui/core/CardMedia';
 import Tooltip from '@material-ui/core/Tooltip';
-import { makeStyles } from '@material-ui/core/styles'
-
-
-
-// const useStyles = makeStyles(() => ({
-//   root: {
-//     maxWidth: 345,
-//     maxHeight:400
-//   },
-//   media: {
-//     height: 0,
-//     paddingTop: '56.25%', // 16:9
-//   },
-// }));
 
 
 export class GridComp extends Component {
@@ -68,10 +54,8 @@ export class GridComp extends Component {
    
     render() {
         const {repos, loading} = this.state;
-        // const classes = useStyles();
 
         function FormRow(repo) {
-            console.log(repo)
             return (
               <React.Fragment>
                 <Grid item xs={4}>
