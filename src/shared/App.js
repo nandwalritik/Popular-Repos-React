@@ -3,6 +3,7 @@ import routes from './routes'
 import { Route,Switch } from 'react-router-dom'
 import NoMatch from './NoMatch'
 import Navbar from './Navbar'
+import { StylesProvider } from '@material-ui/core'
 
 
 class App extends Component {
@@ -29,3 +30,8 @@ class App extends Component {
 }
 
 export default App
+const styles={
+  back:{
+    background:'black'
+  }
+}

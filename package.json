@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack -w & nodemon server.js",
-    "start": "node server.js", 
+    "dev": "node server.js",
+    "start": "webpack -w & nodemon server.js", 
     "heroku-postbuild": "webpack -p",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

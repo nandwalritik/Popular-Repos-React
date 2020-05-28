@@ -31,7 +31,7 @@ export default function Navbar(){
 return(
         
         <div>
-            <AppBar position='static' style={{marginBottom:10}}>
+            <AppBar position='fixed' style={styles.navbarStyle}>
                 <Tabs  value={value} onChange={handleChange} centered>
                 {languages.map(({name,param})=>(
                         <Tab key={name} 
@@ -48,3 +48,11 @@ return(
         </div>
 
 )}
+
+const styles={
+    navbarStyle:{
+        background: 'linear-gradient(to right, #fc354c, #0abfbc) !important',
+        marginBottom: 10,
+        padding:7
+    }
+}

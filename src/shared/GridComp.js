@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
 import CardMedia from '@material-ui/core/CardMedia';
 import Tooltip from '@material-ui/core/Tooltip';
-
+import  CardActions from '@material-ui/core/CardActions';
 
 export class GridComp extends Component {
     constructor(props){
@@ -56,53 +56,51 @@ export class GridComp extends Component {
         const {repos, loading} = this.state;
 
         function FormRow(repo) {
+          console.log(repo)
             return (
               <React.Fragment>
                 <Grid item xs={4}>
                   <div margin={20}>
                   <Card>
-                    <CardHeader
+                    <CardHeader style={styles.CardHeader}
                        avatar={
-                        <Avatar src={repo.repo.owner.avatar_url}/>
+                        <Avatar style={styles.large} src={repo.repo.owner.avatar_url}/>
                       }
                       action={
                         <Tooltip title="Github">
-                            <IconButton>
-                            <a href={repo.repo.html_url} target="_blank">
-                               <InfoIcon />
-                            </a>  
-                        </IconButton>
+                            <IconButton style={styles.iconButton}>
+                              
+                                <InfoIcon onClick={() => window.open(repo.repo.html_url)}/>
+                               
+                            </IconButton>
                         </Tooltip>
                         
                       }
+                      titleTypographyProps={{variant:'h6' }}
                       title={repo.repo.name}
                       subheader={repo.repo.created_at.substr(0,10)}
                       
                     />
                     <CardMedia
-                      src="https://images.unsplash.com/photo-1495567720989-cebdbdd97913?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
                     />
-                    <CardContent>
+                    <CardContent style={styles.content}>
                       <Typography variant="body2" color="textSecondary" component="p">
                           {repo.repo.description}
                       </Typography>
                     </CardContent>
-                    <Tooltip title={`Starred : ${repo.repo.stargazers_count}`}>
-                      <IconButton>
-                        <StarIcon/>
-                      </IconButton>
-                    </Tooltip>
-                    
-                    <Tooltip title="Homepage">
-                        <IconButton>
-                          <a href={repo.repo.homepage} target="_blank">
-                            <HomeIcon/>
-                          </a>
-                        </IconButton>
-                    </Tooltip>
-                    
+                    <CardActions style={styles.CardBottom}>
+                        <Tooltip title={`Starred : ${repo.repo.stargazers_count}`}>
+                            <IconButton style={styles.iconButton}>
+                              <StarIcon />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Homepage">
+                            <IconButton style={styles.iconButton}>
+                                <HomeIcon onClick={() => window.open(repo.repo.homepage)}/>
+                            </IconButton>
+                        </Tooltip>
+                    </CardActions>
                   </Card>
-                        
                   </div>
                 </Grid>
               </React.Fragment>
@@ -112,15 +110,43 @@ export class GridComp extends Component {
             return <h1>Loading....</h1>
         }
         return (
-            <Grid container spacing={1}>
-            <Grid container item xs={28} spacing={3}>
-            {repos.map((repo) =>(
-                    <FormRow repo={repo}></FormRow>
-                ))}
-            </Grid>
-          </Grid>
+          
+                <Grid container spacing={1} style={styles.mainCon}>
+                  <Grid container item xs={28} spacing={3}>
+                      {repos.map((repo) =>(
+                              <FormRow repo={repo}></FormRow>
+                          ))}
+                  </Grid>
+                </Grid>
+         
+            
         )
     }
 }
 
 export default GridComp
+
+const styles={
+  CardHeader:{
+    background: 'linear-gradient(to left, #283048, #859398) !important'
+  },
+  CardBottom:{
+    background: 'linear-gradient(to top, #8e9eab, #eef2f3) !important'
+  },
+  content:{
+    background: 'linear-gradient(to left, #ece9e6, #ffffff !important'
+  },
+  mainCon:{
+    marginTop:65
+  },
+  iconButton:{
+    color: 'black !important'
+  },
+  large:{
+    width:60,
+    height:60
+  },
+  font:{
+    fontSize:'1em'
+  }
+}

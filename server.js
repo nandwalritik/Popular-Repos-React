@@ -187,8 +187,9 @@ app.get("*", function (req, res, next) {
     res.send("\n      <!DOCTYPE html>\n      <html>\n        <head>\n          <title>SSR with RR</title>\n          <style id=\"jss-server-side\">" + css + "</style>\n          <script src=\"/bundle.js\" defer></script>\n          <script>window.__INITIAL_DATA__=" + (0, _serializeJavascript2.default)(data) + "</script>\n        </head>\n  \n        <body>\n          <div id=\"app\"> " + markup + "</div>\n        </body>\n      </html>\n    ");
   }).catch(next);
 });
-app.listen(3001, function () {
-  console.log("Server is listening on port: 3001");
+app.set('port', process.env.PORT || 5000);
+app.listen(app.get('port'), function () {
+  console.log("Server is listening on port: " + app.get('port'));
 });
 
 /***/ }),
@@ -241,6 +242,8 @@ var _NoMatch2 = _interopRequireDefault(_NoMatch);
 var _Navbar = __webpack_require__(24);
 
 var _Navbar2 = _interopRequireDefault(_Navbar);
+
+var _core = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -298,6 +301,12 @@ var App = function (_Component) {
 }(_react.Component);
 
 exports.default = App;
+
+var styles = {
+  back: {
+    background: 'black'
+  }
+};
 
 /***/ }),
 /* 9 */
@@ -385,6 +394,10 @@ var _Tooltip = __webpack_require__(20);
 
 var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
+var _CardActions = __webpack_require__(30);
+
+var _CardActions2 = _interopRequireDefault(_CardActions);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -463,6 +476,7 @@ var GridComp = exports.GridComp = function (_Component) {
 
 
             function FormRow(repo) {
+                console.log(repo);
                 return _react2.default.createElement(
                     _react2.default.Fragment,
                     null,
@@ -475,31 +489,28 @@ var GridComp = exports.GridComp = function (_Component) {
                             _react2.default.createElement(
                                 _core.Card,
                                 null,
-                                _react2.default.createElement(_core.CardHeader, {
-                                    avatar: _react2.default.createElement(_Avatar2.default, { src: repo.repo.owner.avatar_url }),
+                                _react2.default.createElement(_core.CardHeader, { style: styles.CardHeader,
+                                    avatar: _react2.default.createElement(_Avatar2.default, { style: styles.large, src: repo.repo.owner.avatar_url }),
                                     action: _react2.default.createElement(
                                         _Tooltip2.default,
                                         { title: 'Github' },
                                         _react2.default.createElement(
                                             _IconButton2.default,
-                                            null,
-                                            _react2.default.createElement(
-                                                'a',
-                                                { href: repo.repo.html_url, target: '_blank' },
-                                                _react2.default.createElement(_Info2.default, null)
-                                            )
+                                            { style: styles.iconButton },
+                                            _react2.default.createElement(_Info2.default, { onClick: function onClick() {
+                                                    return window.open(repo.repo.html_url);
+                                                } })
                                         )
                                     ),
+                                    titleTypographyProps: { variant: 'h6' },
                                     title: repo.repo.name,
                                     subheader: repo.repo.created_at.substr(0, 10)
 
                                 }),
-                                _react2.default.createElement(_CardMedia2.default, {
-                                    src: 'https://images.unsplash.com/photo-1495567720989-cebdbdd97913?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80'
-                                }),
+                                _react2.default.createElement(_CardMedia2.default, null),
                                 _react2.default.createElement(
                                     _CardContent2.default,
-                                    null,
+                                    { style: styles.content },
                                     _react2.default.createElement(
                                         _Typography2.default,
                                         { variant: 'body2', color: 'textSecondary', component: 'p' },
@@ -507,24 +518,26 @@ var GridComp = exports.GridComp = function (_Component) {
                                     )
                                 ),
                                 _react2.default.createElement(
-                                    _Tooltip2.default,
-                                    { title: 'Starred : ' + repo.repo.stargazers_count },
+                                    _CardActions2.default,
+                                    { style: styles.CardBottom },
                                     _react2.default.createElement(
-                                        _IconButton2.default,
-                                        null,
-                                        _react2.default.createElement(_Star2.default, null)
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    _Tooltip2.default,
-                                    { title: 'Homepage' },
-                                    _react2.default.createElement(
-                                        _IconButton2.default,
-                                        null,
+                                        _Tooltip2.default,
+                                        { title: 'Starred : ' + repo.repo.stargazers_count },
                                         _react2.default.createElement(
-                                            'a',
-                                            { href: repo.repo.homepage, target: '_blank' },
-                                            _react2.default.createElement(_Home2.default, null)
+                                            _IconButton2.default,
+                                            { style: styles.iconButton },
+                                            _react2.default.createElement(_Star2.default, null)
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        _Tooltip2.default,
+                                        { title: 'Homepage' },
+                                        _react2.default.createElement(
+                                            _IconButton2.default,
+                                            { style: styles.iconButton },
+                                            _react2.default.createElement(_Home2.default, { onClick: function onClick() {
+                                                    return window.open(repo.repo.homepage);
+                                                } })
                                         )
                                     )
                                 )
@@ -542,7 +555,7 @@ var GridComp = exports.GridComp = function (_Component) {
             }
             return _react2.default.createElement(
                 _Grid2.default,
-                { container: true, spacing: 1 },
+                { container: true, spacing: 1, style: styles.mainCon },
                 _react2.default.createElement(
                     _Grid2.default,
                     { container: true, item: true, xs: 28, spacing: 3 },
@@ -558,6 +571,32 @@ var GridComp = exports.GridComp = function (_Component) {
 }(_react.Component);
 
 exports.default = GridComp;
+
+
+var styles = {
+    CardHeader: {
+        background: 'linear-gradient(to left, #283048, #859398) !important'
+    },
+    CardBottom: {
+        background: 'linear-gradient(to top, #8e9eab, #eef2f3) !important'
+    },
+    content: {
+        background: 'linear-gradient(to left, #ece9e6, #ffffff !important'
+    },
+    mainCon: {
+        marginTop: 65
+    },
+    iconButton: {
+        color: 'black !important'
+    },
+    large: {
+        width: 60,
+        height: 60
+    },
+    font: {
+        fontSize: '1em'
+    }
+};
 
 /***/ }),
 /* 11 */
@@ -741,7 +780,7 @@ function Navbar() {
         null,
         _react2.default.createElement(
             _core.AppBar,
-            { position: 'static', style: { marginBottom: 10 } },
+            { position: 'fixed', style: styles.navbarStyle },
             _react2.default.createElement(
                 _core.Tabs,
                 { value: value, onChange: handleChange, centered: true },
@@ -760,6 +799,14 @@ function Navbar() {
     );
 }
 
+var styles = {
+    navbarStyle: {
+        background: 'linear-gradient(to right, #fc354c, #0abfbc) !important',
+        marginBottom: 10,
+        padding: 7
+    }
+};
+
 /***/ }),
 /* 25 */
 /***/ (function(module, exports) {
@@ -771,6 +818,15 @@ module.exports = require("serialize-javascript");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/styles");
+
+/***/ }),
+/* 27 */,
+/* 28 */,
+/* 29 */,
+/* 30 */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/CardActions");
 
 /***/ })
 /******/ ]);
