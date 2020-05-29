@@ -4,14 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node server.js",
-    "start": "webpack -w & nodemon server.js", 
+    "dev": "webpack -w & nodemon server.js",
+    "start": " webpack -w & node server.js",
     "heroku-postbuild": "webpack -p",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "babel": {
     "presets": [
-      "env",
+      [
+        "env",
+        {
+          "useBuiltIns": "usage"
+        }
+      ],
       "react"
     ],
     "plugins": [
@@ -26,19 +31,22 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "cors": "^2.8.5",
+    "isomorphic-fetch": "^2.2.1",
     "nodemon": "^1.12.5",
     "webpack": "^3.10.0",
+    "webpack-cli": "^3.3.11",
     "webpack-node-externals": "^1.6.0"
   },
   "dependencies": {
     "@material-ui/core": "^4.10.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.54",
-    "cors": "^2.8.4",
     "express": "^4.16.2",
-    "isomorphic-fetch": "^2.2.1",
     "react": "^16.13.1",
+    "react-center": "^1.1.1",
     "react-dom": "^16.13.1",
+    "react-loader-spinner": "^3.1.14",
     "react-router-dom": "^4.2.2",
     "serialize-javascript": "^1.4.0"
   }

@@ -2,8 +2,8 @@ import React from 'react'
 
 export default function Home (){
     return(
-        <div>
-          Ritik  
+        <div sytle={{margin:300}}>
+         Material UI + REACT + SERVER Side Rendering 
         </div>
     )
 }

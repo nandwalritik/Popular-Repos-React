@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Card,CardHeader} from '@material-ui/core';
+import CardHeader from '@material-ui/core/CardHeader';
+import Card from '@material-ui/core/Card';
 import Grid   from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import InfoIcon from '@material-ui/icons/Info';
@@ -11,6 +12,11 @@ import HomeIcon from '@material-ui/icons/Home';
 import CardMedia from '@material-ui/core/CardMedia';
 import Tooltip from '@material-ui/core/Tooltip';
 import  CardActions from '@material-ui/core/CardActions';
+import Box from '@material-ui/core/Box';
+import styles from '../../theme'
+import Skeleton from '@material-ui/lab/Skeleton'
+import Loader from 'react-loader-spinner'
+import Center from 'react-center';   
 
 export class GridComp extends Component {
     constructor(props){
@@ -51,14 +57,32 @@ export class GridComp extends Component {
         }
 
     }
-   
+
     render() {
         const {repos, loading} = this.state;
-
+        
         function FormRow(repo) {
-          console.log(repo)
             return (
-              <React.Fragment>
+              (loading?(
+                    <React.Fragment>
+                        <Grid item xs={4}>
+                            <div margin={20}>
+                                <Box display="flex" alignItems="center">
+                                    <Box margin={1}>
+                                        <Skeleton variant="circle" width={60} height={60} animation="wave"/>
+                                    </Box>
+                                    <Box>
+                                        <Skeleton variant="text" width={320} animation="wave"/>
+                                        <Skeleton variant="text" width={220} animation="wave"/> 
+                                    </Box>
+                                </Box>
+                                <Skeleton variant="rect" width={400} height={150} animation="wave"/>
+                            </div>
+                        </Grid>
+                    </React.Fragment>
+                
+               ):(
+                <React.Fragment>
                 <Grid item xs={4}>
                   <div margin={20}>
                   <Card>
@@ -69,17 +93,13 @@ export class GridComp extends Component {
                       action={
                         <Tooltip title="Github">
                             <IconButton style={styles.iconButton}>
-                              
                                 <InfoIcon onClick={() => window.open(repo.repo.html_url)}/>
-                               
                             </IconButton>
                         </Tooltip>
-                        
                       }
                       titleTypographyProps={{variant:'h6' }}
                       title={repo.repo.name}
                       subheader={repo.repo.created_at.substr(0,10)}
-                      
                     />
                     <CardMedia
                     />
@@ -104,49 +124,29 @@ export class GridComp extends Component {
                   </div>
                 </Grid>
               </React.Fragment>
+              ))
             );
           }
         if(loading===true){
-            return <h1>Loading....</h1>
+                return   <Center style={{margin:300}}><Loader type="Puff"
+                                                              color="#AAAAAA"
+                                                              height={100}
+                                                              width={100}/>
+                                                              </Center>
+                
         }
         return (
-          
                 <Grid container spacing={1} style={styles.mainCon}>
                   <Grid container item xs={28} spacing={3}>
+                     
                       {repos.map((repo) =>(
-                              <FormRow repo={repo}></FormRow>
+                              <FormRow repo={repo}/>
                           ))}
                   </Grid>
                 </Grid>
-         
-            
         )
     }
 }
-
 export default GridComp
 
-const styles={
-  CardHeader:{
-    background: 'linear-gradient(to left, #283048, #859398) !important'
-  },
-  CardBottom:{
-    background: 'linear-gradient(to top, #8e9eab, #eef2f3) !important'
-  },
-  content:{
-    background: 'linear-gradient(to left, #ece9e6, #ffffff !important'
-  },
-  mainCon:{
-    marginTop:65
-  },
-  iconButton:{
-    color: 'black !important'
-  },
-  large:{
-    width:60,
-    height:60
-  },
-  font:{
-    fontSize:'1em'
-  }
-}
+

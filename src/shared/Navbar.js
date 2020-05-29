@@ -1,6 +1,8 @@
 import React from 'react'
-
-import {AppBar,Tabs,Tab} from '@material-ui/core'
+import styles from '../../theme'
+import Tab from '@material-ui/core/Tab'
+import Tabs from '@material-ui/core/Tabs'
+import AppBar from '@material-ui/core/AppBar'
 import { Link } from 'react-router-dom'
 
 export default function Navbar(){
@@ -48,11 +50,3 @@ return(
         </div>
 
 )}
-
-const styles={
-    navbarStyle:{
-        background: 'linear-gradient(to right, #fc354c, #0abfbc) !important',
-        marginBottom: 10,
-        padding:7
-    }
-}
