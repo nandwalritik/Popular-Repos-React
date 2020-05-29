@@ -3,7 +3,6 @@ import { hydrate } from 'react-dom'
 import App from '../shared/App'
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from '@material-ui/core/styles'
-import theme from '../../theme'
 function Main() {
   React.useEffect(() => {
     const jssStyles = document.getElementById('jss-server-side');
@@ -13,7 +12,7 @@ function Main() {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>,

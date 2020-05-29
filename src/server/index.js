@@ -7,7 +7,6 @@ import serialize from 'serialize-javascript'
 import { ServerStyleSheets, ThemeProvider } from '@material-ui/core/styles';
 import {matchPath} from 'react-router-dom'
 import routes from '../shared/routes'
-import theme from '../../theme'
 import { StaticRouter } from 'react-router-dom'
 const app = express()
 const sheets = new ServerStyleSheets();
@@ -27,7 +26,7 @@ app.get("*", (req, res, next) => {
     const context = {data}
     const markup = renderToString(
       sheets.collect(
-        <ThemeProvider theme={theme}>
+        <ThemeProvider>
             <StaticRouter location={req.url} context={context}>
               <App />
             </StaticRouter>

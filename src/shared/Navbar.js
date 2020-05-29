@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from '../../theme'
 import Tab from '@material-ui/core/Tab'
 import Tabs from '@material-ui/core/Tabs'
 import AppBar from '@material-ui/core/AppBar'
@@ -50,3 +49,10 @@ return(
         </div>
 
 )}
+const styles={
+    navbarStyle:{
+        background: 'linear-gradient(to right, #fc354c, #0abfbc) !important',
+        marginBottom: 10,
+        padding:7
+    }
+}

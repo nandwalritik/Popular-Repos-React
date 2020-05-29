@@ -13,7 +13,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Tooltip from '@material-ui/core/Tooltip';
 import  CardActions from '@material-ui/core/CardActions';
 import Box from '@material-ui/core/Box';
-import styles from '../../theme'
 import Skeleton from '@material-ui/lab/Skeleton'
 import Loader from 'react-loader-spinner'
 import Center from 'react-center';   
@@ -150,3 +149,28 @@ export class GridComp extends Component {
 export default GridComp
 
 
+const styles = {
+    CardHeader:{
+      background: 'linear-gradient(to left, #283048, #859398) !important'
+    },
+    CardBottom:{
+      background: 'linear-gradient(to top, #8e9eab, #eef2f3) !important'
+    },
+    content:{
+      background: 'linear-gradient(to left, #ece9e6, #ffffff !important'
+    },
+    mainCon:{
+      marginTop:65
+    },
+    iconButton:{
+      color: 'black !important'
+    },
+    large:{
+      width:60,
+      height:60
+    },
+    font:{
+      fontSize:'1em'
+    }
+    
+};
