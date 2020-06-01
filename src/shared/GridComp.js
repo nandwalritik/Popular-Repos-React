@@ -28,7 +28,9 @@ const useStyles = theme =>({
             content:{
               background: 'linear-gradient(to left, #ece9e6, #ffffff !important'
             },
-            
+            mainCon:{
+              marginTop:100,
+            },
             iconButton:{
               color: 'black !important'
             },

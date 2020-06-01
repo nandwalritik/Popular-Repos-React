@@ -52,7 +52,6 @@ return(
 const styles={
     navbarStyle:{
         background: 'linear-gradient(to right, #fc354c, #0abfbc) !important',
-        marginBottom: 10,
-        padding:7
+        
     }
 }

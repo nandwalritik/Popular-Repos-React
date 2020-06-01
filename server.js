@@ -243,6 +243,8 @@ var _Navbar = __webpack_require__(31);
 
 var _Navbar2 = _interopRequireDefault(_Navbar);
 
+var _styles = __webpack_require__(3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -298,7 +300,7 @@ var App = function (_Component) {
   return App;
 }(_react.Component);
 
-exports.default = App;
+exports.default = (0, _styles.withStyles)(null)(App);
 
 /***/ }),
 /* 9 */
@@ -433,7 +435,9 @@ var useStyles = function useStyles(theme) {
         content: {
             background: 'linear-gradient(to left, #ece9e6, #ffffff !important'
         },
-
+        mainCon: {
+            marginTop: 100
+        },
         iconButton: {
             color: 'black !important'
         },
@@ -894,9 +898,8 @@ function Navbar() {
 }
 var styles = {
     navbarStyle: {
-        background: 'linear-gradient(to right, #fc354c, #0abfbc) !important',
-        marginBottom: 10,
-        padding: 7
+        background: 'linear-gradient(to right, #fc354c, #0abfbc) !important'
+
     }
 };
 

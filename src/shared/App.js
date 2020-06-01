@@ -3,6 +3,7 @@ import routes from './routes'
 import { Route,Switch } from 'react-router-dom'
 import NoMatch from './NoMatch'
 import Navbar from './Navbar'
+import { withStyles } from '@material-ui/core/styles';
 
 
 class App extends Component {
@@ -28,4 +29,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default withStyles(null)(App)
