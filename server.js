@@ -114,7 +114,12 @@ var routes = [{
 exports.default = routes;
 
 /***/ }),
-/* 3 */,
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/styles");
+
+/***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -143,7 +148,7 @@ var _serializeJavascript = __webpack_require__(35);
 
 var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
 
-var _styles = __webpack_require__(36);
+var _styles = __webpack_require__(3);
 
 var _reactRouterDom = __webpack_require__(1);
 
@@ -399,6 +404,8 @@ var _Skeleton = __webpack_require__(25);
 
 var _Skeleton2 = _interopRequireDefault(_Skeleton);
 
+var _styles = __webpack_require__(3);
+
 var _reactLoaderSpinner = __webpack_require__(26);
 
 var _reactLoaderSpinner2 = _interopRequireDefault(_reactLoaderSpinner);
@@ -414,6 +421,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var useStyles = function useStyles(theme) {
+    return {
+        CardHeader: {
+            background: 'linear-gradient(to left, #283048, #859398) !important'
+        },
+        CardBottom: {
+            background: 'linear-gradient(to top, #8e9eab, #eef2f3) !important'
+        },
+        content: {
+            background: 'linear-gradient(to left, #ece9e6, #ffffff !important'
+        },
+
+        iconButton: {
+            color: 'black !important'
+        },
+        large: {
+            width: 60,
+            height: 60
+        },
+        font: {
+            fontSize: '1em'
+        }
+    };
+};
 
 var GridComp = exports.GridComp = function (_Component) {
     _inherits(GridComp, _Component);
@@ -482,7 +514,7 @@ var GridComp = exports.GridComp = function (_Component) {
             var _state = this.state,
                 repos = _state.repos,
                 loading = _state.loading;
-
+            var classes = this.props.classes;
 
             function FormRow(repo) {
                 return loading ? _react2.default.createElement(
@@ -524,14 +556,14 @@ var GridComp = exports.GridComp = function (_Component) {
                             _react2.default.createElement(
                                 _Card2.default,
                                 null,
-                                _react2.default.createElement(_CardHeader2.default, { style: styles.CardHeader,
-                                    avatar: _react2.default.createElement(_Avatar2.default, { style: styles.large, src: repo.repo.owner.avatar_url }),
+                                _react2.default.createElement(_CardHeader2.default, { className: classes.CardHeader,
+                                    avatar: _react2.default.createElement(_Avatar2.default, { className: classes.large, src: repo.repo.owner.avatar_url }),
                                     action: _react2.default.createElement(
                                         _Tooltip2.default,
                                         { title: 'Github' },
                                         _react2.default.createElement(
                                             _IconButton2.default,
-                                            { style: styles.iconButton },
+                                            { className: classes.iconButton },
                                             _react2.default.createElement(_Info2.default, { onClick: function onClick() {
                                                     return window.open(repo.repo.html_url);
                                                 } })
@@ -544,7 +576,7 @@ var GridComp = exports.GridComp = function (_Component) {
                                 _react2.default.createElement(_CardMedia2.default, null),
                                 _react2.default.createElement(
                                     _CardContent2.default,
-                                    { style: styles.content },
+                                    { className: classes.content },
                                     _react2.default.createElement(
                                         _Typography2.default,
                                         { variant: 'body2', color: 'textSecondary', component: 'p' },
@@ -553,13 +585,13 @@ var GridComp = exports.GridComp = function (_Component) {
                                 ),
                                 _react2.default.createElement(
                                     _CardActions2.default,
-                                    { style: styles.CardBottom },
+                                    { className: classes.CardBottom },
                                     _react2.default.createElement(
                                         _Tooltip2.default,
                                         { title: 'Starred : ' + repo.repo.stargazers_count },
                                         _react2.default.createElement(
                                             _IconButton2.default,
-                                            { style: styles.iconButton },
+                                            { className: classes.iconButton },
                                             _react2.default.createElement(_Star2.default, null)
                                         )
                                     ),
@@ -568,7 +600,7 @@ var GridComp = exports.GridComp = function (_Component) {
                                         { title: 'Homepage' },
                                         _react2.default.createElement(
                                             _IconButton2.default,
-                                            { style: styles.iconButton },
+                                            { className: classes.iconButton },
                                             _react2.default.createElement(_Home2.default, { onClick: function onClick() {
                                                     return window.open(repo.repo.homepage);
                                                 } })
@@ -592,7 +624,7 @@ var GridComp = exports.GridComp = function (_Component) {
             }
             return _react2.default.createElement(
                 _Grid2.default,
-                { container: true, spacing: 1, style: styles.mainCon },
+                { container: true, spacing: 1, className: classes.mainCon },
                 _react2.default.createElement(
                     _Grid2.default,
                     { container: true, item: true, xs: 28, spacing: 3 },
@@ -607,34 +639,7 @@ var GridComp = exports.GridComp = function (_Component) {
     return GridComp;
 }(_react.Component);
 
-exports.default = GridComp;
-
-
-var styles = {
-    CardHeader: {
-        background: 'linear-gradient(to left, #283048, #859398) !important'
-    },
-    CardBottom: {
-        background: 'linear-gradient(to top, #8e9eab, #eef2f3) !important'
-    },
-    content: {
-        background: 'linear-gradient(to left, #ece9e6, #ffffff !important'
-    },
-    mainCon: {
-        marginTop: 65
-    },
-    iconButton: {
-        color: 'black !important'
-    },
-    large: {
-        width: 60,
-        height: 60
-    },
-    font: {
-        fontSize: '1em'
-    }
-
-};
+exports.default = (0, _styles.withStyles)(useStyles)(GridComp);
 
 /***/ }),
 /* 11 */
@@ -918,12 +923,6 @@ module.exports = require("@material-ui/core/AppBar");
 /***/ (function(module, exports) {
 
 module.exports = require("serialize-javascript");
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/styles");
 
 /***/ })
 /******/ ]);

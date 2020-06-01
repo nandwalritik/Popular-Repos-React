@@ -14,9 +14,32 @@ import Tooltip from '@material-ui/core/Tooltip';
 import  CardActions from '@material-ui/core/CardActions';
 import Box from '@material-ui/core/Box';
 import Skeleton from '@material-ui/lab/Skeleton'
+import { withStyles } from '@material-ui/core/styles';
 import Loader from 'react-loader-spinner'
-import Center from 'react-center';   
+import Center from 'react-center';  
 
+const useStyles = theme =>({
+            CardHeader:{
+              background: 'linear-gradient(to left, #283048, #859398) !important'
+            },
+            CardBottom:{
+              background: 'linear-gradient(to top, #8e9eab, #eef2f3) !important'
+            },
+            content:{
+              background: 'linear-gradient(to left, #ece9e6, #ffffff !important'
+            },
+            
+            iconButton:{
+              color: 'black !important'
+            },
+            large:{
+              width:60,
+              height:60
+            },
+            font:{
+              fontSize:'1em'
+            }
+});
 export class GridComp extends Component {
     constructor(props){
         super(props);
@@ -56,10 +79,13 @@ export class GridComp extends Component {
         }
 
     }
+    
 
     render() {
         const {repos, loading} = this.state;
         
+        
+        const {classes} = this.props; 
         function FormRow(repo) {
             return (
               (loading?(
@@ -85,13 +111,13 @@ export class GridComp extends Component {
                 <Grid item xs={4}>
                   <div margin={20}>
                   <Card>
-                    <CardHeader style={styles.CardHeader}
+                    <CardHeader className={classes.CardHeader}
                        avatar={
-                        <Avatar style={styles.large} src={repo.repo.owner.avatar_url}/>
+                        <Avatar className={classes.large} src={repo.repo.owner.avatar_url}/>
                       }
                       action={
                         <Tooltip title="Github">
-                            <IconButton style={styles.iconButton}>
+                            <IconButton className={classes.iconButton}>
                                 <InfoIcon onClick={() => window.open(repo.repo.html_url)}/>
                             </IconButton>
                         </Tooltip>
@@ -102,19 +128,19 @@ export class GridComp extends Component {
                     />
                     <CardMedia
                     />
-                    <CardContent style={styles.content}>
+                    <CardContent className={classes.content}>
                       <Typography variant="body2" color="textSecondary" component="p">
                           {repo.repo.description}
                       </Typography>
                     </CardContent>
-                    <CardActions style={styles.CardBottom}>
+                    <CardActions className={classes.CardBottom}>
                         <Tooltip title={`Starred : ${repo.repo.stargazers_count}`}>
-                            <IconButton style={styles.iconButton}>
+                            <IconButton className={classes.iconButton}>
                               <StarIcon />
                             </IconButton>
                         </Tooltip>
                         <Tooltip title="Homepage">
-                            <IconButton style={styles.iconButton}>
+                            <IconButton className={classes.iconButton}>
                                 <HomeIcon onClick={() => window.open(repo.repo.homepage)}/>
                             </IconButton>
                         </Tooltip>
@@ -127,7 +153,7 @@ export class GridComp extends Component {
             );
           }
         if(loading===true){
-                return   <Center style={{margin:300}}><Loader type="Puff"
+                return    <Center style={{margin:300}}><Loader type="Puff"
                                                               color="#AAAAAA"
                                                               height={100}
                                                               width={100}/>
@@ -135,7 +161,7 @@ export class GridComp extends Component {
                 
         }
         return (
-                <Grid container spacing={1} style={styles.mainCon}>
+                <Grid container spacing={1} className={classes.mainCon}>
                   <Grid container item xs={28} spacing={3}>
                      
                       {repos.map((repo) =>(
@@ -146,31 +172,6 @@ export class GridComp extends Component {
         )
     }
 }
-export default GridComp
+export default withStyles(useStyles)(GridComp)
 
 
-const styles = {
-    CardHeader:{
-      background: 'linear-gradient(to left, #283048, #859398) !important'
-    },
-    CardBottom:{
-      background: 'linear-gradient(to top, #8e9eab, #eef2f3) !important'
-    },
-    content:{
-      background: 'linear-gradient(to left, #ece9e6, #ffffff !important'
-    },
-    mainCon:{
-      marginTop:65
-    },
-    iconButton:{
-      color: 'black !important'
-    },
-    large:{
-      width:60,
-      height:60
-    },
-    font:{
-      fontSize:'1em'
-    }
-    
-};
