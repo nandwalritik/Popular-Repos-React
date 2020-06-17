@@ -19680,8 +19680,6 @@ var _Navbar = __webpack_require__(294);
 
 var _Navbar2 = _interopRequireDefault(_Navbar);
 
-var _styles = __webpack_require__(48);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -19737,7 +19735,7 @@ var App = function (_Component) {
   return App;
 }(_react.Component);
 
-exports.default = (0, _styles.withStyles)(null)(App);
+exports.default = App;
 
 /***/ }),
 /* 99 */
@@ -19793,13 +19791,39 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactCenter = __webpack_require__(265);
+
+var _reactCenter2 = _interopRequireDefault(_reactCenter);
+
+var _Typography = __webpack_require__(71);
+
+var _Typography2 = _interopRequireDefault(_Typography);
+
+var _Grid = __webpack_require__(192);
+
+var _Grid2 = _interopRequireDefault(_Grid);
+
+var _theme = __webpack_require__(312);
+
+var _theme2 = _interopRequireDefault(_theme);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Home() {
+
     return _react2.default.createElement(
-        'div',
-        { sytle: { margin: 300 } },
-        'Material UI + REACT + SERVER Side Rendering'
+        _Grid2.default,
+        { justify: 'center', alignItems: 'center', style: _theme2.default.home },
+        _react2.default.createElement(
+            _Typography2.default,
+            { variant: 'body2', color: 'textSecondary' },
+            'Material UI + REACT + SERVER Side Rendering'
+        ),
+        _react2.default.createElement(
+            _Typography2.default,
+            { variant: 'body2', color: 'textSecondary' },
+            'Server-side rendering (SSR), is the ability of an application to contribute by displaying the web-page on the server instead of rendering it in the browser. Server-side sends a fully rendered page to the client; the client\u2019s JavaScript bundle takes over and allows the SPA framework to operate. There is also client-side rendering which slows down the procedure of viewing and interacting with the web page. Advantages of using server-side rendering It enables pages to load faster which provides a better user experience. It plays an important role in SEO (search engine optimization) and correctly indexes webpages. This happens because Google favors web pages with faster load time. It provides body to the HTML pages for all server ships. It assists with\u200B loading the page when the user has a\u200B slow internet connection. It assists in loading the page when the user has an outdated device.'
+        )
     );
 }
 
@@ -19881,8 +19905,6 @@ var _Skeleton = __webpack_require__(237);
 
 var _Skeleton2 = _interopRequireDefault(_Skeleton);
 
-var _styles = __webpack_require__(48);
-
 var _reactLoaderSpinner = __webpack_require__(245);
 
 var _reactLoaderSpinner2 = _interopRequireDefault(_reactLoaderSpinner);
@@ -19891,6 +19913,10 @@ var _reactCenter = __webpack_require__(265);
 
 var _reactCenter2 = _interopRequireDefault(_reactCenter);
 
+var _theme = __webpack_require__(312);
+
+var _theme2 = _interopRequireDefault(_theme);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -19898,33 +19924,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var useStyles = function useStyles(theme) {
-    return {
-        CardHeader: {
-            background: 'linear-gradient(to left, #283048, #859398) !important'
-        },
-        CardBottom: {
-            background: 'linear-gradient(to top, #8e9eab, #eef2f3) !important'
-        },
-        content: {
-            background: 'linear-gradient(to left, #ece9e6, #ffffff !important'
-        },
-        mainCon: {
-            marginTop: 100
-        },
-        iconButton: {
-            color: 'black !important'
-        },
-        large: {
-            width: 60,
-            height: 60
-        },
-        font: {
-            fontSize: '1em'
-        }
-    };
-};
 
 var GridComp = exports.GridComp = function (_Component) {
     _inherits(GridComp, _Component);
@@ -19979,6 +19978,7 @@ var GridComp = exports.GridComp = function (_Component) {
     }, {
         key: 'componentWillReceiveProps',
         value: function componentWillReceiveProps(nextProps) {
+            window.location.reload(false);
             var _props = this.props,
                 match = _props.match,
                 fetchInitialData = _props.fetchInitialData;
@@ -19993,7 +19993,7 @@ var GridComp = exports.GridComp = function (_Component) {
             var _state = this.state,
                 repos = _state.repos,
                 loading = _state.loading;
-            var classes = this.props.classes;
+
 
             function FormRow(repo) {
                 return loading ? _react2.default.createElement(
@@ -20035,14 +20035,14 @@ var GridComp = exports.GridComp = function (_Component) {
                             _react2.default.createElement(
                                 _Card2.default,
                                 null,
-                                _react2.default.createElement(_CardHeader2.default, { className: classes.CardHeader,
-                                    avatar: _react2.default.createElement(_Avatar2.default, { className: classes.large, src: repo.repo.owner.avatar_url }),
+                                _react2.default.createElement(_CardHeader2.default, { style: _theme2.default.CardHeader,
+                                    avatar: _react2.default.createElement(_Avatar2.default, { style: _theme2.default.large, src: repo.repo.owner.avatar_url }),
                                     action: _react2.default.createElement(
                                         _Tooltip2.default,
                                         { title: 'Github' },
                                         _react2.default.createElement(
                                             _IconButton2.default,
-                                            { className: classes.iconButton },
+                                            { style: _theme2.default.iconButton },
                                             _react2.default.createElement(_Info2.default, { onClick: function onClick() {
                                                     return window.open(repo.repo.html_url);
                                                 } })
@@ -20055,7 +20055,7 @@ var GridComp = exports.GridComp = function (_Component) {
                                 _react2.default.createElement(_CardMedia2.default, null),
                                 _react2.default.createElement(
                                     _CardContent2.default,
-                                    { className: classes.content },
+                                    { style: _theme2.default.content },
                                     _react2.default.createElement(
                                         _Typography2.default,
                                         { variant: 'body2', color: 'textSecondary', component: 'p' },
@@ -20064,13 +20064,13 @@ var GridComp = exports.GridComp = function (_Component) {
                                 ),
                                 _react2.default.createElement(
                                     _CardActions2.default,
-                                    { className: classes.CardBottom },
+                                    { style: _theme2.default.CardBottom },
                                     _react2.default.createElement(
                                         _Tooltip2.default,
                                         { title: 'Starred : ' + repo.repo.stargazers_count },
                                         _react2.default.createElement(
                                             _IconButton2.default,
-                                            { className: classes.iconButton },
+                                            { style: _theme2.default.iconButton },
                                             _react2.default.createElement(_Star2.default, null)
                                         )
                                     ),
@@ -20079,7 +20079,7 @@ var GridComp = exports.GridComp = function (_Component) {
                                         { title: 'Homepage' },
                                         _react2.default.createElement(
                                             _IconButton2.default,
-                                            { className: classes.iconButton },
+                                            { style: _theme2.default.iconButton },
                                             _react2.default.createElement(_Home2.default, { onClick: function onClick() {
                                                     return window.open(repo.repo.homepage);
                                                 } })
@@ -20102,14 +20102,18 @@ var GridComp = exports.GridComp = function (_Component) {
                 );
             }
             return _react2.default.createElement(
-                _Grid2.default,
-                { container: true, spacing: 1, className: classes.mainCon },
+                'div',
+                { style: _theme2.default.mainCon },
                 _react2.default.createElement(
                     _Grid2.default,
-                    { container: true, item: true, xs: 28, spacing: 3 },
-                    repos.map(function (repo) {
-                        return _react2.default.createElement(FormRow, { repo: repo });
-                    })
+                    { container: true, spacing: 3 },
+                    _react2.default.createElement(
+                        _Grid2.default,
+                        { container: true, item: true, xs: 28, spacing: 2 },
+                        repos.map(function (repo) {
+                            return _react2.default.createElement(FormRow, { repo: repo });
+                        })
+                    )
                 )
             );
         }
@@ -20118,7 +20122,7 @@ var GridComp = exports.GridComp = function (_Component) {
     return GridComp;
 }(_react.Component);
 
-exports.default = (0, _styles.withStyles)(useStyles)(GridComp);
+exports.default = GridComp;
 
 /***/ }),
 /* 102 */
@@ -41786,6 +41790,10 @@ var _AppBar2 = _interopRequireDefault(_AppBar);
 
 var _reactRouterDom = __webpack_require__(49);
 
+var _theme = __webpack_require__(312);
+
+var _theme2 = _interopRequireDefault(_theme);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Navbar() {
@@ -41820,10 +41828,10 @@ function Navbar() {
         null,
         _react2.default.createElement(
             _AppBar2.default,
-            { position: 'fixed', style: styles.navbarStyle },
+            { position: 'fixed', style: _theme2.default.navbarStyle },
             _react2.default.createElement(
                 _Tabs2.default,
-                { value: value, onChange: handleChange, centered: true },
+                { centered: true },
                 languages.map(function (_ref) {
                     var name = _ref.name,
                         param = _ref.param;
@@ -41838,12 +41846,6 @@ function Navbar() {
         )
     );
 }
-var styles = {
-    navbarStyle: {
-        background: 'linear-gradient(to right, #fc354c, #0abfbc) !important'
-
-    }
-};
 
 /***/ }),
 /* 295 */
@@ -43709,6 +43711,51 @@ exports.default = (0, _withStyles2.default)(styles, {
   name: 'MuiAppBar'
 })(AppBar);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 312 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var classes = {
+  navbarStyle: {
+    background: 'linear-gradient(to right, #fc354c, #0abfbc) !important',
+    paddingBottom: '7px !important'
+  },
+  CardHeader: {
+    background: 'linear-gradient(to left, #283048, #859398) !important'
+  },
+  CardBottom: {
+    background: 'linear-gradient(to top, #8e9eab, #eef2f3) !important'
+  },
+  content: {
+    background: 'linear-gradient(to left, #ece9e6, #ffffff !important'
+  },
+  iconButton: {
+    color: 'black !important'
+  },
+  large: {
+    width: 60,
+    height: 60
+  },
+  font: {
+    fontSize: '1em'
+  },
+  mainCon: {
+    marginTop: '60px !important',
+    width: '100% !important'
+
+  },
+  home: {
+    marging: '250px !important'
+  }
+};
+exports.default = classes;
 
 /***/ })
 /******/ ]);

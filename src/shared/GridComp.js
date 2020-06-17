@@ -14,34 +14,11 @@ import Tooltip from '@material-ui/core/Tooltip';
 import  CardActions from '@material-ui/core/CardActions';
 import Box from '@material-ui/core/Box';
 import Skeleton from '@material-ui/lab/Skeleton'
-import { withStyles } from '@material-ui/core/styles';
 import Loader from 'react-loader-spinner'
 import Center from 'react-center';  
+import classes from "./theme"
 
-const useStyles = theme =>({
-            CardHeader:{
-              background: 'linear-gradient(to left, #283048, #859398) !important'
-            },
-            CardBottom:{
-              background: 'linear-gradient(to top, #8e9eab, #eef2f3) !important'
-            },
-            content:{
-              background: 'linear-gradient(to left, #ece9e6, #ffffff !important'
-            },
-            mainCon:{
-              marginTop:100,
-            },
-            iconButton:{
-              color: 'black !important'
-            },
-            large:{
-              width:60,
-              height:60
-            },
-            font:{
-              fontSize:'1em'
-            }
-});
+
 export class GridComp extends Component {
     constructor(props){
         super(props);
@@ -75,6 +52,7 @@ export class GridComp extends Component {
         }
     }
     componentWillReceiveProps(nextProps){
+        window.location.reload(false);
         const {match,fetchInitialData} = this.props
         if(nextProps.match.params.id !== match.params.id){
             this.fetchRepos(nextProps.match.params.id)
@@ -85,9 +63,7 @@ export class GridComp extends Component {
 
     render() {
         const {repos, loading} = this.state;
-        
-        
-        const {classes} = this.props; 
+
         function FormRow(repo) {
             return (
               (loading?(
@@ -113,13 +89,13 @@ export class GridComp extends Component {
                 <Grid item xs={4}>
                   <div margin={20}>
                   <Card>
-                    <CardHeader className={classes.CardHeader}
+                    <CardHeader style={classes.CardHeader}
                        avatar={
-                        <Avatar className={classes.large} src={repo.repo.owner.avatar_url}/>
+                        <Avatar style={classes.large} src={repo.repo.owner.avatar_url}/>
                       }
                       action={
                         <Tooltip title="Github">
-                            <IconButton className={classes.iconButton}>
+                            <IconButton style={classes.iconButton}>
                                 <InfoIcon onClick={() => window.open(repo.repo.html_url)}/>
                             </IconButton>
                         </Tooltip>
@@ -130,19 +106,19 @@ export class GridComp extends Component {
                     />
                     <CardMedia
                     />
-                    <CardContent className={classes.content}>
+                    <CardContent style={classes.content}>
                       <Typography variant="body2" color="textSecondary" component="p">
                           {repo.repo.description}
                       </Typography>
                     </CardContent>
-                    <CardActions className={classes.CardBottom}>
+                    <CardActions style={classes.CardBottom}>
                         <Tooltip title={`Starred : ${repo.repo.stargazers_count}`}>
-                            <IconButton className={classes.iconButton}>
+                            <IconButton style={classes.iconButton}>
                               <StarIcon />
                             </IconButton>
                         </Tooltip>
                         <Tooltip title="Homepage">
-                            <IconButton className={classes.iconButton}>
+                            <IconButton style={classes.iconButton}>
                                 <HomeIcon onClick={() => window.open(repo.repo.homepage)}/>
                             </IconButton>
                         </Tooltip>
@@ -163,17 +139,19 @@ export class GridComp extends Component {
                 
         }
         return (
-                <Grid container spacing={1} className={classes.mainCon}>
-                  <Grid container item xs={28} spacing={3}>
+            <div style={classes.mainCon}>
+                <Grid container spacing={3} >
+                  <Grid container item xs={28} spacing={2}>
                      
                       {repos.map((repo) =>(
                               <FormRow repo={repo}/>
                           ))}
                   </Grid>
                 </Grid>
+            </div>
+                
         )
     }
 }
-export default withStyles(useStyles)(GridComp)
-
+export default GridComp
 

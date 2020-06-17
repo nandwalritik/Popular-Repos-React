@@ -3,7 +3,7 @@ import Tab from '@material-ui/core/Tab'
 import Tabs from '@material-ui/core/Tabs'
 import AppBar from '@material-ui/core/AppBar'
 import { Link } from 'react-router-dom'
-
+import styles from './theme'
 export default function Navbar(){
     const languages=[
         {
@@ -33,7 +33,7 @@ return(
         
         <div>
             <AppBar position='fixed' style={styles.navbarStyle}>
-                <Tabs  value={value} onChange={handleChange} centered>
+                <Tabs centered>
                 {languages.map(({name,param})=>(
                         <Tab key={name} 
                              label={name}
@@ -49,9 +49,3 @@ return(
         </div>
 
 )}
-const styles={
-    navbarStyle:{
-        background: 'linear-gradient(to right, #fc354c, #0abfbc) !important',
-        
-    }
-}
