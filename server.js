@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,12 +71,64 @@ module.exports = require("react");
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _styles = __webpack_require__(36);
+
+var classes = (0, _styles.createMuiTheme)({
+  root: {
+    primary: 'linear-gradient(to right, #fc354c, #0abfbc)',
+    secondary: 'linear-gradient(to left, #283048, #859398)'
+  },
+  navbarStyle: {
+    background: 'linear-gradient(to right, #fc354c, #0abfbc) !important',
+    paddingBottom: '7px !important'
+  },
+  CardHeader: {
+    background: 'linear-gradient(to left, #283048, #859398) !important'
+  },
+  CardBottom: {
+    background: 'linear-gradient(to top, #8e9eab, #eef2f3) !important'
+  },
+  content: {
+    background: 'linear-gradient(to left, #ece9e6, #ffffff !important'
+  },
+  iconButton: {
+    color: 'black !important'
+  },
+  large: {
+    width: 60,
+    height: 60
+  },
+  font: {
+    fontSize: '1em'
+  },
+  mainCon: {
+    marginTop: '60px !important',
+    width: '100% !important'
+
+  },
+  home: {
+    marging: '250px !important'
+  }
+});
+exports.default = classes;
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-router-dom");
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -86,11 +138,11 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _Home = __webpack_require__(9);
+var _Home = __webpack_require__(12);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _GridComp = __webpack_require__(10);
+var _GridComp = __webpack_require__(13);
 
 var _GridComp2 = _interopRequireDefault(_GridComp);
 
@@ -114,29 +166,41 @@ var routes = [{
 exports.default = routes;
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
-module.exports = require("@material-ui/core/styles");
+module.exports = require("react-center");
 
 /***/ }),
-/* 4 */
+/* 5 */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Typography");
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+module.exports = require("@material-ui/core/Grid");
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _express = __webpack_require__(5);
+var _express = __webpack_require__(8);
 
 var _express2 = _interopRequireDefault(_express);
 
-var _cors = __webpack_require__(6);
+var _cors = __webpack_require__(9);
 
 var _cors2 = _interopRequireDefault(_cors);
 
-var _server = __webpack_require__(7);
+var _server = __webpack_require__(10);
 
-var _App = __webpack_require__(8);
+var _App = __webpack_require__(11);
 
 var _App2 = _interopRequireDefault(_App);
 
@@ -148,13 +212,17 @@ var _serializeJavascript = __webpack_require__(35);
 
 var _serializeJavascript2 = _interopRequireDefault(_serializeJavascript);
 
-var _styles = __webpack_require__(3);
+var _styles = __webpack_require__(36);
 
-var _reactRouterDom = __webpack_require__(1);
+var _reactRouterDom = __webpack_require__(2);
 
-var _routes = __webpack_require__(2);
+var _routes = __webpack_require__(3);
 
 var _routes2 = _interopRequireDefault(_routes);
+
+var _theme = __webpack_require__(1);
+
+var _theme2 = _interopRequireDefault(_theme);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -176,7 +244,7 @@ app.get("*", function (req, res, next) {
     var context = { data: data };
     var markup = (0, _server.renderToString)(sheets.collect(_react2.default.createElement(
       _styles.ThemeProvider,
-      null,
+      { theme: _theme2.default },
       _react2.default.createElement(
         _reactRouterDom.StaticRouter,
         { location: req.url, context: context },
@@ -193,25 +261,25 @@ app.listen(app.get('port'), function () {
 });
 
 /***/ }),
-/* 5 */
+/* 8 */
 /***/ (function(module, exports) {
 
 module.exports = require("express");
 
 /***/ }),
-/* 6 */
+/* 9 */
 /***/ (function(module, exports) {
 
 module.exports = require("cors");
 
 /***/ }),
-/* 7 */
+/* 10 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
 
 /***/ }),
-/* 8 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -229,11 +297,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _routes = __webpack_require__(2);
+var _routes = __webpack_require__(3);
 
 var _routes2 = _interopRequireDefault(_routes);
 
-var _reactRouterDom = __webpack_require__(1);
+var _reactRouterDom = __webpack_require__(2);
 
 var _NoMatch = __webpack_require__(30);
 
@@ -301,7 +369,7 @@ var App = function (_Component) {
 exports.default = App;
 
 /***/ }),
-/* 9 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -316,19 +384,19 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactCenter = __webpack_require__(27);
+var _reactCenter = __webpack_require__(4);
 
 var _reactCenter2 = _interopRequireDefault(_reactCenter);
 
-var _Typography = __webpack_require__(19);
+var _Typography = __webpack_require__(5);
 
 var _Typography2 = _interopRequireDefault(_Typography);
 
-var _Grid = __webpack_require__(13);
+var _Grid = __webpack_require__(6);
 
 var _Grid2 = _interopRequireDefault(_Grid);
 
-var _theme = __webpack_require__(36);
+var _theme = __webpack_require__(1);
 
 var _theme2 = _interopRequireDefault(_theme);
 
@@ -353,7 +421,7 @@ function Home() {
 }
 
 /***/ }),
-/* 10 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -370,75 +438,75 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _CardHeader = __webpack_require__(11);
+var _CardHeader = __webpack_require__(14);
 
 var _CardHeader2 = _interopRequireDefault(_CardHeader);
 
-var _Card = __webpack_require__(12);
+var _Card = __webpack_require__(15);
 
 var _Card2 = _interopRequireDefault(_Card);
 
-var _Grid = __webpack_require__(13);
+var _Grid = __webpack_require__(6);
 
 var _Grid2 = _interopRequireDefault(_Grid);
 
-var _Avatar = __webpack_require__(14);
+var _Avatar = __webpack_require__(16);
 
 var _Avatar2 = _interopRequireDefault(_Avatar);
 
-var _Info = __webpack_require__(15);
+var _Info = __webpack_require__(17);
 
 var _Info2 = _interopRequireDefault(_Info);
 
-var _IconButton = __webpack_require__(16);
+var _IconButton = __webpack_require__(18);
 
 var _IconButton2 = _interopRequireDefault(_IconButton);
 
-var _CardContent = __webpack_require__(17);
+var _CardContent = __webpack_require__(19);
 
 var _CardContent2 = _interopRequireDefault(_CardContent);
 
-var _Star = __webpack_require__(18);
+var _Star = __webpack_require__(20);
 
 var _Star2 = _interopRequireDefault(_Star);
 
-var _Typography = __webpack_require__(19);
+var _Typography = __webpack_require__(5);
 
 var _Typography2 = _interopRequireDefault(_Typography);
 
-var _Home = __webpack_require__(20);
+var _Home = __webpack_require__(21);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _CardMedia = __webpack_require__(21);
+var _CardMedia = __webpack_require__(22);
 
 var _CardMedia2 = _interopRequireDefault(_CardMedia);
 
-var _Tooltip = __webpack_require__(22);
+var _Tooltip = __webpack_require__(23);
 
 var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
-var _CardActions = __webpack_require__(23);
+var _CardActions = __webpack_require__(24);
 
 var _CardActions2 = _interopRequireDefault(_CardActions);
 
-var _Box = __webpack_require__(24);
+var _Box = __webpack_require__(25);
 
 var _Box2 = _interopRequireDefault(_Box);
 
-var _Skeleton = __webpack_require__(25);
+var _Skeleton = __webpack_require__(26);
 
 var _Skeleton2 = _interopRequireDefault(_Skeleton);
 
-var _reactLoaderSpinner = __webpack_require__(26);
+var _reactLoaderSpinner = __webpack_require__(27);
 
 var _reactLoaderSpinner2 = _interopRequireDefault(_reactLoaderSpinner);
 
-var _reactCenter = __webpack_require__(27);
+var _reactCenter = __webpack_require__(4);
 
 var _reactCenter2 = _interopRequireDefault(_reactCenter);
 
-var _theme = __webpack_require__(36);
+var _theme = __webpack_require__(1);
 
 var _theme2 = _interopRequireDefault(_theme);
 
@@ -479,6 +547,9 @@ var GridComp = exports.GridComp = function (_Component) {
         value: function fetchRepos(lang) {
             var _this2 = this;
 
+            // window.location.reload(false);
+
+            // console.log("In fetch Repos");
             this.setState(function () {
                 return {
                     loading: true
@@ -496,6 +567,7 @@ var GridComp = exports.GridComp = function (_Component) {
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
+
             if (!this.state.repos) {
                 this.fetchRepos(this.props.match.params.id);
             }
@@ -504,9 +576,11 @@ var GridComp = exports.GridComp = function (_Component) {
         key: 'componentWillReceiveProps',
         value: function componentWillReceiveProps(nextProps) {
             window.location.reload(false);
+
             var _props = this.props,
                 match = _props.match,
                 fetchInitialData = _props.fetchInitialData;
+            // console.log("Fetch init data" , fetchInitialData);
 
             if (nextProps.match.params.id !== match.params.id) {
                 this.fetchRepos(nextProps.match.params.id);
@@ -521,34 +595,7 @@ var GridComp = exports.GridComp = function (_Component) {
 
 
             function FormRow(repo) {
-                return loading ? _react2.default.createElement(
-                    _react2.default.Fragment,
-                    null,
-                    _react2.default.createElement(
-                        _Grid2.default,
-                        { item: true, xs: 4 },
-                        _react2.default.createElement(
-                            'div',
-                            { margin: 20 },
-                            _react2.default.createElement(
-                                _Box2.default,
-                                { display: 'flex', alignItems: 'center' },
-                                _react2.default.createElement(
-                                    _Box2.default,
-                                    { margin: 1 },
-                                    _react2.default.createElement(_Skeleton2.default, { variant: 'circle', width: 60, height: 60, animation: 'wave' })
-                                ),
-                                _react2.default.createElement(
-                                    _Box2.default,
-                                    null,
-                                    _react2.default.createElement(_Skeleton2.default, { variant: 'text', width: 320, animation: 'wave' }),
-                                    _react2.default.createElement(_Skeleton2.default, { variant: 'text', width: 220, animation: 'wave' })
-                                )
-                            ),
-                            _react2.default.createElement(_Skeleton2.default, { variant: 'rect', width: 400, height: 150, animation: 'wave' })
-                        )
-                    )
-                ) : _react2.default.createElement(
+                return _react2.default.createElement(
                     _react2.default.Fragment,
                     null,
                     _react2.default.createElement(
@@ -615,7 +662,31 @@ var GridComp = exports.GridComp = function (_Component) {
                         )
                     )
                 );
+                // return (
+                //   (loading?(
+                //         <React.Fragment>
+                //             <Grid item xs={4}>
+                //                 <div margin={20}>
+                //                     <Box display="flex" alignItems="center">
+                //                         <Box margin={1}>
+                //                             <Skeleton variant="circle" width={60} height={60} animation="wave"/>
+                //                         </Box>
+                //                         <Box>
+                //                             <Skeleton variant="text" width={320} animation="wave"/>
+                //                             <Skeleton variant="text" width={220} animation="wave"/> 
+                //                         </Box>
+                //                     </Box>
+                //                     <Skeleton variant="rect" width={400} height={150} animation="wave"/>
+                //                 </div>
+                //             </Grid>
+                //         </React.Fragment>
+
+                //    ):(
+
+                //   ))
+                // );
             }
+
             if (loading === true) {
                 return _react2.default.createElement(
                     _reactCenter2.default,
@@ -626,6 +697,7 @@ var GridComp = exports.GridComp = function (_Component) {
                         width: 100 })
                 );
             }
+            // console.log(this.props);
             return _react2.default.createElement(
                 'div',
                 { style: _theme2.default.mainCon },
@@ -650,106 +722,88 @@ var GridComp = exports.GridComp = function (_Component) {
 exports.default = GridComp;
 
 /***/ }),
-/* 11 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/CardHeader");
 
 /***/ }),
-/* 12 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/Card");
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/Grid");
-
-/***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/Avatar");
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/icons/Info");
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/IconButton");
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/CardContent");
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/icons/Star");
 
 /***/ }),
-/* 19 */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/Typography");
-
-/***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/icons/Home");
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/CardMedia");
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/Tooltip");
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/CardActions");
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/Box");
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/lab/Skeleton");
 
 /***/ }),
-/* 26 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-loader-spinner");
-
-/***/ }),
 /* 27 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-center");
+module.exports = require("react-loader-spinner");
 
 /***/ }),
 /* 28 */
@@ -846,9 +900,9 @@ var _AppBar = __webpack_require__(34);
 
 var _AppBar2 = _interopRequireDefault(_AppBar);
 
-var _reactRouterDom = __webpack_require__(1);
+var _reactRouterDom = __webpack_require__(2);
 
-var _theme = __webpack_require__(36);
+var _theme = __webpack_require__(1);
 
 var _theme2 = _interopRequireDefault(_theme);
 
@@ -931,48 +985,9 @@ module.exports = require("serialize-javascript");
 
 /***/ }),
 /* 36 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var classes = {
-  navbarStyle: {
-    background: 'linear-gradient(to right, #fc354c, #0abfbc) !important',
-    paddingBottom: '7px !important'
-  },
-  CardHeader: {
-    background: 'linear-gradient(to left, #283048, #859398) !important'
-  },
-  CardBottom: {
-    background: 'linear-gradient(to top, #8e9eab, #eef2f3) !important'
-  },
-  content: {
-    background: 'linear-gradient(to left, #ece9e6, #ffffff !important'
-  },
-  iconButton: {
-    color: 'black !important'
-  },
-  large: {
-    width: 60,
-    height: 60
-  },
-  font: {
-    fontSize: '1em'
-  },
-  mainCon: {
-    marginTop: '60px !important',
-    width: '100% !important'
-
-  },
-  home: {
-    marging: '250px !important'
-  }
-};
-exports.default = classes;
+module.exports = require("@material-ui/core/styles");
 
 /***/ })
 /******/ ]);

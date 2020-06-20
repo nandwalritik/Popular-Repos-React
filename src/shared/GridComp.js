@@ -37,6 +37,9 @@ export class GridComp extends Component {
 
     }
     fetchRepos(lang){
+        // window.location.reload(false);
+
+        // console.log("In fetch Repos");
         this.setState(() =>({
             loading:true
         }))
@@ -45,46 +48,33 @@ export class GridComp extends Component {
             repos,
             loading:false,
         })))
+
     }
     componentDidMount(){
+
         if(!this.state.repos){
             this.fetchRepos(this.props.match.params.id)
         }
     }
     componentWillReceiveProps(nextProps){
         window.location.reload(false);
+
         const {match,fetchInitialData} = this.props
+        // console.log("Fetch init data" , fetchInitialData);
         if(nextProps.match.params.id !== match.params.id){
             this.fetchRepos(nextProps.match.params.id)
         }
+        
 
     }
     
 
     render() {
         const {repos, loading} = this.state;
+        
 
         function FormRow(repo) {
             return (
-              (loading?(
-                    <React.Fragment>
-                        <Grid item xs={4}>
-                            <div margin={20}>
-                                <Box display="flex" alignItems="center">
-                                    <Box margin={1}>
-                                        <Skeleton variant="circle" width={60} height={60} animation="wave"/>
-                                    </Box>
-                                    <Box>
-                                        <Skeleton variant="text" width={320} animation="wave"/>
-                                        <Skeleton variant="text" width={220} animation="wave"/> 
-                                    </Box>
-                                </Box>
-                                <Skeleton variant="rect" width={400} height={150} animation="wave"/>
-                            </div>
-                        </Grid>
-                    </React.Fragment>
-                
-               ):(
                 <React.Fragment>
                 <Grid item xs={4}>
                   <div margin={20}>
@@ -127,9 +117,32 @@ export class GridComp extends Component {
                   </div>
                 </Grid>
               </React.Fragment>
-              ))
-            );
+            )
+            // return (
+            //   (loading?(
+            //         <React.Fragment>
+            //             <Grid item xs={4}>
+            //                 <div margin={20}>
+            //                     <Box display="flex" alignItems="center">
+            //                         <Box margin={1}>
+            //                             <Skeleton variant="circle" width={60} height={60} animation="wave"/>
+            //                         </Box>
+            //                         <Box>
+            //                             <Skeleton variant="text" width={320} animation="wave"/>
+            //                             <Skeleton variant="text" width={220} animation="wave"/> 
+            //                         </Box>
+            //                     </Box>
+            //                     <Skeleton variant="rect" width={400} height={150} animation="wave"/>
+            //                 </div>
+            //             </Grid>
+            //         </React.Fragment>
+                
+            //    ):(
+                
+            //   ))
+            // );
           }
+
         if(loading===true){
                 return    <Center style={{margin:300}}><Loader type="Puff"
                                                               color="#AAAAAA"
@@ -138,6 +151,7 @@ export class GridComp extends Component {
                                                               </Center>
                 
         }
+        // console.log(this.props);
         return (
             <div style={classes.mainCon}>
                 <Grid container spacing={3} >

@@ -1,4 +1,9 @@
-const classes = {
+import { createMuiTheme } from '@material-ui/core/styles';
+const classes = createMuiTheme({
+    root:{
+      primary: 'linear-gradient(to right, #fc354c, #0abfbc)',
+      secondary:'linear-gradient(to left, #283048, #859398)'
+    },
     navbarStyle:{
         background: 'linear-gradient(to right, #fc354c, #0abfbc) !important',
         paddingBottom:'7px !important'
@@ -30,5 +35,5 @@ const classes = {
     home:{
         marging:'250px !important'
     }
-}
+})
 export default classes

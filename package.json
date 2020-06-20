@@ -32,7 +32,6 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "cors": "^2.8.5",
-    "gh-pages": "^3.0.0",
     "isomorphic-fetch": "^2.2.1",
     "nodemon": "^1.12.5",
     "webpack": "^3.10.0",
