@@ -27,7 +27,7 @@ export class GridComp extends Component {
             repos   = window.__INITIAL_DATA__
             delete  window.__INITIAL_DATA__
         }else{
-            repos = props.staticContext.data
+            repos = this.props.staticContext.data
         }
         this.state={
             repos,
@@ -56,16 +56,11 @@ export class GridComp extends Component {
             this.fetchRepos(this.props.match.params.id)
         }
     }
-    componentWillReceiveProps(nextProps){
+    componentDidUpdate(prevProps,prevState){
         window.location.reload(false);
-
-        const {match,fetchInitialData} = this.props
-        // console.log("Fetch init data" , fetchInitialData);
-        if(nextProps.match.params.id !== match.params.id){
-            this.fetchRepos(nextProps.match.params.id)
-        }
-        
-
+        if (prevProps.match.params.id !== this.props.match.params.id) {
+            this.fetchRepos(this.props.match.params.id)
+          }
     }
     
 
